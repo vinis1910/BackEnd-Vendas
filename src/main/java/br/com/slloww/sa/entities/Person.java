@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import br.com.slloww.sa.enums.Perfis;
+import br.com.slloww.sa.enums.Profiles;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,7 +36,7 @@ public abstract class Person implements Serializable {
 
 	public Person() {
 		super();
-		this.setProfiles(Perfis.CLIENTE);
+		this.setProfiles(Profiles.CUSTOMER);
 	}
 
 	public Person(Long id, String name, String email, String password, String phone) {
@@ -46,7 +46,7 @@ public abstract class Person implements Serializable {
 		this.email = email;
 		this.password = password;
 		this.phone = phone;
-		this.setProfiles(Perfis.CLIENTE);
+		this.setProfiles(Profiles.CUSTOMER);
 	}
 
 	public Long getId() {
@@ -89,11 +89,11 @@ public abstract class Person implements Serializable {
 		this.phone = phone;
 	}
 
-	public Set<Perfis> getProfiles() {
-		return profiles.stream().map(x -> Perfis.valueOf(x)).collect(Collectors.toSet());
+	public Set<Profiles> getProfiles() {
+		return profiles.stream().map(x -> Profiles.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setProfiles(Perfis perfis) {
+	public void setProfiles(Profiles perfis) {
 		this.profiles.add(perfis.getCode());
 	}
 
