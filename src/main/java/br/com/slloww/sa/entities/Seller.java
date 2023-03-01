@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.slloww.sa.enums.Profiles;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -15,11 +16,12 @@ public class Seller extends Person implements Serializable {
 	private List<Order> orders = new ArrayList<>();
 
 	public Seller() {
+		this.setProfiles(Profiles.SELLER);
 	}
 
 	public Seller(Long id, String name, String email, String password, String phone) {
 		super(id, name, email, password, phone);
-		// TODO Auto-generated constructor stub
+		this.setProfiles(Profiles.SELLER);
 	}
 
 	public List<Order> getOrders() {

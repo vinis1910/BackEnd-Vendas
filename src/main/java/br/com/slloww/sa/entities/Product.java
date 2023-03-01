@@ -32,13 +32,12 @@ public class Product implements Serializable {
 		super();
 	}
 
-	public Product(Long id, String name, String desc, Double price, Set<Categories> cat) {
+	public Product(Long id, String name, String desc, Double price) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.price = price;
-		this.cat = cat;
 	}
 
 	public Long getId() {
