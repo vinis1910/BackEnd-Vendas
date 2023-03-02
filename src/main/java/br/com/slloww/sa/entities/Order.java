@@ -30,7 +30,7 @@ public class Order {
 	private LocalDateTime date = LocalDateTime.now();
 
 	@Column(name = "Items")
-	@OneToMany(mappedBy = "id.order")
+	@OneToMany
 	private Set<OrderItem> items = new HashSet<>();
 
 	@ManyToOne
