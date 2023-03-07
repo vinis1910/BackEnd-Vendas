@@ -31,18 +31,5 @@ public enum Profiles {
 		}
 		throw new IllegalArgumentException("Invalid perfil code");
 	}
-	
-	public static Profiles toEnum(Integer cod) {
-		if(cod == null) {
-			return null;
-		}
-		
-		for(Profiles x : Profiles.values()) {
-			if(cod.equals(x.getCode())){
-				return x;
-			}
-		}
-		throw new IllegalArgumentException("Perfil inválido");
-	}
 
 }

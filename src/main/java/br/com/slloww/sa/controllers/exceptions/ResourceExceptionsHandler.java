@@ -1,0 +1,51 @@
+package br.com.slloww.sa.controllers.exceptions;
+
+import java.time.LocalDate;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import br.com.slloww.sa.services.exceptions.DataIntegrityViolationException;
+import br.com.slloww.sa.services.exceptions.ObjectNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
+
+
+@ControllerAdvice
+public class ResourceExceptionsHandler {
+	@ExceptionHandler(ObjectNotFoundException.class)
+	public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException ex,
+			HttpServletRequest request) {
+
+		StandardError error = new StandardError(LocalDate.now(), HttpStatus.NOT_FOUND.value(), "Objeto nao encontrado",
+				ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException ex,
+			HttpServletRequest request) {
+
+		StandardError error = new StandardError(LocalDate.now(), HttpStatus.BAD_REQUEST.value(), "Vaiolação de dados",
+				ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<StandardError> validationErrors(MethodArgumentNotValidException ex,
+			HttpServletRequest request) {
+
+		ValidationErrors errors = new ValidationErrors(LocalDate.now(), HttpStatus.BAD_REQUEST.value(),
+				"Erro de validação", "Erro de validação dos campos", request.getRequestURI());
+
+		for (FieldError x : ex.getBindingResult().getFieldErrors()) {
+			errors.addError(x.getField(), x.getDefaultMessage());
+		}
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+	}
+
+}
