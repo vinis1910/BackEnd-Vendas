@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.com.slloww.sa.DTOs.ProductDTO;
 import br.com.slloww.sa.enums.Categories;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Entity;
@@ -38,6 +39,14 @@ public class Product implements Serializable {
 		this.name = name;
 		this.desc = desc;
 		this.price = price;
+	}
+	
+	public Product(ProductDTO product) {
+		super();
+		this.id = product.getId();
+		this.name = product.getNome();
+		this.desc = product.getDescription();
+		this.price = product.getPrice();
 	}
 
 	public Long getId() {

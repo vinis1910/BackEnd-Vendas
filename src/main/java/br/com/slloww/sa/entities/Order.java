@@ -1,5 +1,6 @@
 package br.com.slloww.sa.entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,12 +18,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "tb_order")
+public class Order implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
 	private Long id;
 
 	@JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
@@ -46,11 +47,8 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Long id, LocalDateTime date, Set<OrderItem> items, Customer customer, Seller seller) {
+	public Order(Customer customer, Seller seller) {
 		super();
-		this.id = id;
-		this.date = date;
-		this.items = items;
 		this.customer = customer;
 		this.seller = seller;
 	}
