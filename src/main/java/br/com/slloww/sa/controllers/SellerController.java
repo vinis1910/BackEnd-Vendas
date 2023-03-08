@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.slloww.sa.DTOs.SellerDTO;
 import br.com.slloww.sa.entities.Seller;
 import br.com.slloww.sa.services.SellerService;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/sellers")
