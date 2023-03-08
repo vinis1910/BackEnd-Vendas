@@ -5,9 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import br.com.slloww.sa.entities.Seller;
 import br.com.slloww.sa.enums.Profiles;
-import jakarta.validation.constraints.NotNull;
 
 public class SellerDTO implements Serializable {
 	private static final long serialVersionUID = 1L;

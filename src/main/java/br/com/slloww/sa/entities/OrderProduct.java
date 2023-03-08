@@ -2,51 +2,40 @@ package br.com.slloww.sa.entities;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import br.com.slloww.sa.entities.pk.OrderItemPk;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_orderItem")
-public class OrderItem {
+public class OrderProduct {
 	
-	@EmbeddedId
-	private OrderItemPk id = new OrderItemPk();
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private Integer quantity;
 	private Double price;
 	
-	public OrderItem() {
+	@OneToOne
+	private Product product;
+	
+	@ManyToOne
+	private Order order;
+	
+	public OrderProduct() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderItem(Order order, Product product, Integer quantity, Double price) {
+	public OrderProduct(Integer quantity, Product product, Order order) {
 		super();
-		id.setOrder(order);
-		id.setProduct(product);
 		this.quantity = quantity;
-		this.price = price;
-	}
-
-	@JsonIgnore
-	public Order getOrder() {
-		return id.getOrder();
-	}
-
-	public void setOrder(Order order) {
-		id.setOrder(order);
-	}
-
-	public Product getProduct() {
-		return id.getProduct();
-	}
-
-	public void setProduct(Product product) {
-		id.setProduct(product);
+		this.product = product;
+		this.order = order;
 	}
 
 	public Integer getQuantity() {
@@ -82,7 +71,7 @@ public class OrderItem {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrderItem other = (OrderItem) obj;
+		OrderProduct other = (OrderProduct) obj;
 		return Objects.equals(id, other.id);
 	}
 	

@@ -5,14 +5,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import br.com.slloww.sa.enums.Profiles;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "person")
@@ -31,7 +34,8 @@ public abstract class Person implements Serializable {
 	@Column(unique = true)
 	protected String phone;
 
-	@CollectionTable(name = "Perfis")
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "profiles")
 	protected Set<Integer> profiles = new HashSet<>();
 
 	public Person() {

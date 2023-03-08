@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.slloww.sa.DTOs.CustomerDTO;
 import br.com.slloww.sa.entities.Customer;
 import br.com.slloww.sa.services.CustomerService;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/customers")

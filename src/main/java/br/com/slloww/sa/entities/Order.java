@@ -2,20 +2,19 @@ package br.com.slloww.sa.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_order")
@@ -30,27 +29,27 @@ public class Order implements Serializable {
 	@Column(name = "Date")
 	private LocalDateTime date = LocalDateTime.now();
 
-	@Column(name = "Items")
-	@OneToMany
-	private Set<OrderItem> items = new HashSet<>();
-
 	@ManyToOne
 	@JoinColumn(name = "Customers")
 	private Customer customer;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "Seller")
 	private Seller seller;
+
+	@OneToMany(mappedBy = "order")
+	private List<OrderProduct> orderProduct;
 
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Customer customer, Seller seller) {
+	public Order(Customer customer, Seller seller, List<OrderProduct> orderProduct) {
 		super();
 		this.customer = customer;
 		this.seller = seller;
+		this.orderProduct = orderProduct;
 	}
 
 	public Long getId() {
@@ -69,14 +68,6 @@ public class Order implements Serializable {
 		this.date = date;
 	}
 
-	public Set<OrderItem> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<OrderItem> items) {
-		this.items = items;
-	}
-
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -91,6 +82,14 @@ public class Order implements Serializable {
 
 	public void setSeller(Seller seller) {
 		this.seller = seller;
+	}
+
+	public List<OrderProduct> getOrderItem() {
+		return orderProduct;
+	}
+
+	public void setOrderItem(List<OrderProduct> orderProduct) {
+		this.orderProduct = orderProduct;
 	}
 
 }
