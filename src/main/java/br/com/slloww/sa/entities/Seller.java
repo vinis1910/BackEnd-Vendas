@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import br.com.slloww.sa.DTOs.SellerDTO;
 import br.com.slloww.sa.enums.Profiles;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Seller extends Person implements Serializable {
