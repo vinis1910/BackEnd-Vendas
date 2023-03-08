@@ -2,6 +2,8 @@ package br.com.slloww.sa.controllers.exceptions;
 
 import java.time.LocalDate;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.slloww.sa.services.exceptions.DataIntegrityViolationException;
 import br.com.slloww.sa.services.exceptions.ObjectNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
 
 
 @ControllerAdvice
