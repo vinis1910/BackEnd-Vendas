@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import br.com.slloww.sa.DTOs.ProductDTO;
 import br.com.slloww.sa.enums.Categories;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "product")
@@ -26,8 +30,12 @@ public class Product implements Serializable {
 	private String desc;
 	private Double price;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Categories")
 	private Set<Categories> cat = new HashSet<>();
+	
+	@ManyToOne
+	private OrderProduct orderProducts;
 
 	public Product() {
 		super();
