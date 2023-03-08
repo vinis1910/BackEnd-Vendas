@@ -3,6 +3,8 @@ package br.com.slloww.sa.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,6 @@ import br.com.slloww.sa.repositories.CustomerRepository;
 import br.com.slloww.sa.repositories.PersonRepository;
 import br.com.slloww.sa.services.exceptions.DataIntegrityViolationException;
 import br.com.slloww.sa.services.exceptions.ObjectNotFoundException;
-import jakarta.validation.Valid;
 
 @Service
 public class CustomerService {
