@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.slloww.sa.DTOs.ProductDTO;
@@ -33,9 +32,6 @@ public class Product implements Serializable {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Categories")
 	private Set<Categories> cat = new HashSet<>();
-	
-	@ManyToOne
-	private OrderProduct orderProducts;
 
 	public Product() {
 		super();

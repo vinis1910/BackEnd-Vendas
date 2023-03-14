@@ -2,7 +2,8 @@ package br.com.slloww.sa.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,27 +30,26 @@ public class Order implements Serializable {
 	@Column(name = "Date")
 	private LocalDateTime date = LocalDateTime.now();
 
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderProduct> products = new HashSet<>();
+
 	@ManyToOne
 	@JoinColumn(name = "Customers")
 	private Customer customer;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "Seller")
 	private Seller seller;
-
-	@OneToMany(mappedBy = "order")
-	private List<OrderProduct> orderProduct;
 
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Customer customer, Seller seller, List<OrderProduct> orderProduct) {
+	public Order(Customer customer, Seller seller) {
 		super();
 		this.customer = customer;
 		this.seller = seller;
-		this.orderProduct = orderProduct;
 	}
 
 	public Long getId() {
@@ -68,6 +68,14 @@ public class Order implements Serializable {
 		this.date = date;
 	}
 
+	public Set<OrderProduct> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<OrderProduct> products) {
+		this.products = products;
+	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -75,21 +83,13 @@ public class Order implements Serializable {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
+	
 	public Seller getSeller() {
 		return seller;
 	}
 
 	public void setSeller(Seller seller) {
 		this.seller = seller;
-	}
-
-	public List<OrderProduct> getOrderItem() {
-		return orderProduct;
-	}
-
-	public void setOrderItem(List<OrderProduct> orderProduct) {
-		this.orderProduct = orderProduct;
 	}
 
 }

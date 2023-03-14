@@ -2,29 +2,23 @@ package br.com.slloww.sa.entities;
 
 import java.util.Objects;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.slloww.sa.entities.pk.OrderProductPk;
+
 @Entity
-@Table(name = "tb_orderItem")
+@Table(name = "OrderProduct")
 public class OrderProduct {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@EmbeddedId
+	private OrderProductPk id = new OrderProductPk();
+	
 	private Integer quantity;
 	private Double price;
-	
-	@OneToOne
-	private Product product;
-	
-	@ManyToOne
-	private Order order;
 	
 	public OrderProduct() {
 		super();
@@ -34,10 +28,27 @@ public class OrderProduct {
 	public OrderProduct(Integer quantity, Product product, Order order) {
 		super();
 		this.quantity = quantity;
-		this.product = product;
-		this.order = order;
+		id.setOrder(order);
+		id.setProduct(product);
 	}
 
+	@JsonIgnore
+	public Order getOrder() {
+		return id.getOrder();
+	}
+
+	public void setOrder(Order order) {
+		id.setOrder(order);
+	}
+
+	public Product getProduct() {
+		return id.getProduct();
+	}
+
+	public void setProduct(Product product) {
+		id.setProduct(product);
+	}
+	
 	public Integer getQuantity() {
 		return quantity;
 	}
