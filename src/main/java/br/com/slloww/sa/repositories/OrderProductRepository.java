@@ -4,5 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.slloww.sa.entities.OrderProduct;
 
-public interface OrderItemRepository extends JpaRepository<OrderProduct, Long> {
+
+public interface OrderProductRepository extends JpaRepository<OrderProduct, Long> {
 }

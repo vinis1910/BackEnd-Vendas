@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.slloww.sa.DTOs.CustomerDTO;
@@ -23,6 +24,9 @@ public class CustomerService {
 
 	@Autowired
 	private PersonRepository personRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
@@ -35,6 +39,7 @@ public class CustomerService {
 
 	public Customer create(CustomerDTO obj) {
 		obj.setId(null);
+		obj.setPassword(encoder.encode(obj.getPassword()));
 		ValidationByTelAndEmail(obj);
 		Customer newObj = new Customer(obj);
 		return customerRepository.save(newObj);

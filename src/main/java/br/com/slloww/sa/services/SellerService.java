@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.slloww.sa.DTOs.SellerDTO;
@@ -23,6 +24,9 @@ public class SellerService {
 
 	@Autowired
 	private PersonRepository personRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public List<Seller> findAll() {
 		return SellerRepository.findAll();
@@ -35,6 +39,7 @@ public class SellerService {
 
 	public Seller create(SellerDTO obj) {
 		obj.setId(null);
+		obj.setPassword(encoder.encode(obj.getPassword()));
 		ValidationByTelAndEmail(obj);
 		Seller newObj = new Seller(obj);
 		return SellerRepository.save(newObj);
