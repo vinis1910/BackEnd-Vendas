@@ -1,7 +1,7 @@
 package br.com.slloww.sa.enums;
 
 public enum Profiles {
-	SELLER(1, "ROLE_SELLER"), CUSTOMER(2, "ROLE_CUSTOMER");
+	SELLER(1, "ROLE_SELLER"), CUSTOMER(2, "ROLE_CUSTOMER"), ADMIN(3, "ROLE_ADMIN");
 
 	private Integer code;
 	private String desc;
