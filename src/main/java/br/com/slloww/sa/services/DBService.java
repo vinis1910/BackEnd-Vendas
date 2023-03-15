@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.slloww.sa.entities.Admin;
 import br.com.slloww.sa.entities.Customer;
 import br.com.slloww.sa.entities.Order;
 import br.com.slloww.sa.entities.OrderProduct;
 import br.com.slloww.sa.entities.Product;
 import br.com.slloww.sa.entities.Seller;
 import br.com.slloww.sa.enums.Categories;
+import br.com.slloww.sa.repositories.AdminRepository;
 import br.com.slloww.sa.repositories.CustomerRepository;
 import br.com.slloww.sa.repositories.OrderProductRepository;
 import br.com.slloww.sa.repositories.OrderRepository;
@@ -21,6 +23,9 @@ import br.com.slloww.sa.repositories.SellerRepository;
 @Service
 public class DBService {
 
+	@Autowired
+	private AdminRepository adminRepository;
+	
 	@Autowired
 	private SellerRepository sellerRepository;
 	
@@ -44,6 +49,8 @@ public class DBService {
 		Product p1 = new Product(null, "Pc", "descricao pc", 2000.00);
 		p1.getCat().add(Categories.COMPUTER);
 		
+		Admin a1 = new Admin(null, "Vinicius", "viniadm@gmail.com", encoder.encode("123"), "44988521221");
+		
 		Customer c1 = new Customer(null, "amanda", "amanda@gmail.com", encoder.encode("123"), "44988349911");
 		
 		Seller s1 = new Seller(null, "Vinicius G", "vinicius@gmail.com", encoder.encode("123"), "44988449911");
@@ -53,7 +60,7 @@ public class DBService {
 		OrderProduct op1 = new OrderProduct(3, p1, o1);
 		
 		
-		
+		adminRepository.saveAll(Arrays.asList(a1));
 		sellerRepository.saveAll(Arrays.asList(s1));
 		customerRepository.saveAll(Arrays.asList(c1));
 		productRepository.saveAll(Arrays.asList(p1));
