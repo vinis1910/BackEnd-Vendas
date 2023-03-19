@@ -51,7 +51,7 @@ public class Order implements Serializable {
 		this.customer = customer;
 		this.seller = seller;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}

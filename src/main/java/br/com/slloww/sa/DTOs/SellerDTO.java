@@ -26,6 +26,7 @@ public class SellerDTO implements Serializable {
 	public SellerDTO() {
 		super();
 		this.addPerfis(Profiles.SELLER);
+		this.addPerfis(Profiles.CUSTOMER);
 		}
 
 	public SellerDTO(Seller admin) {
@@ -36,6 +37,7 @@ public class SellerDTO implements Serializable {
 		this.password = admin.getPassword();
 		this.phone = admin.getPhone();
 		this.addPerfis(Profiles.SELLER);
+		this.addPerfis(Profiles.CUSTOMER);
 	}
 
 	public Long getId() {

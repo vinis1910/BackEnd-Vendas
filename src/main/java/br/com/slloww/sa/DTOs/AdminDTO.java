@@ -26,6 +26,7 @@ public class AdminDTO implements Serializable {
 	public AdminDTO() {
 		super();
 		this.addPerfis(Profiles.ADMIN);
+		this.addPerfis(Profiles.CUSTOMER);
 		}
 
 	public AdminDTO(Admin obj) {
@@ -36,6 +37,7 @@ public class AdminDTO implements Serializable {
 		this.password = obj.getPassword();
 		this.phone = obj.getPhone();
 		this.addPerfis(Profiles.ADMIN);
+		this.addPerfis(Profiles.CUSTOMER);
 	}
 
 	public Long getId() {
