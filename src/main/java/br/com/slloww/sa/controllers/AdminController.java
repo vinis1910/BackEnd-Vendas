@@ -25,6 +25,7 @@ import br.com.slloww.sa.services.AdminService;
 
 @RestController
 @RequestMapping(value = "/admins")
+@PreAuthorize("hasAnyRole('ADMIN')")
 public class AdminController {
 	@Autowired
 	private AdminService service;
@@ -42,7 +43,6 @@ public class AdminController {
 		return ResponseEntity.ok().body(new AdminDTO(admin));
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<AdminDTO> create(@Valid @RequestBody AdminDTO obj) {
 		Admin newObj = service.create(obj);
@@ -51,14 +51,12 @@ public class AdminController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<AdminDTO> update(@PathVariable Long id, @Valid @RequestBody AdminDTO objDTO) {
 		Admin obj = service.update(id, objDTO);
 		return ResponseEntity.ok().body(new AdminDTO(obj));
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<AdminDTO> delete(@PathVariable Long id) {
 		service.delete(id);
