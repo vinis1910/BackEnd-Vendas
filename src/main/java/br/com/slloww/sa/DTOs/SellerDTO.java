@@ -20,7 +20,9 @@ public class SellerDTO implements Serializable {
 	private String email;
 	@NotNull(message = "O campo password está vazio")
 	private String password;
+	@NotNull
 	private String phone;
+	@NotNull
 	private Set<Integer> profiles = new HashSet<>();
 
 	public SellerDTO() {

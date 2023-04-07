@@ -1,21 +1,29 @@
 package br.com.slloww.sa.DTOs;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.validation.constraints.NotNull;
 
 import br.com.slloww.sa.entities.Product;
 import br.com.slloww.sa.enums.Categories;
 
 public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@NotNull
 	private Long id;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String description;
-	private Double price;
+	@NotNull
+	private BigDecimal price;
 	private String imaUrl;
-	private Set<Categories> cat = new HashSet<>();
+	@NotNull
+	private Set<Categories> categories = new HashSet<>();
 
 	public ProductDTO() {
 		super();
@@ -28,7 +36,7 @@ public class ProductDTO implements Serializable {
 		this.nome = product.getName();
 		this.description = product.getDesc();
 		this.price = product.getPrice();
-		this.cat = product.getCat();
+		this.categories = product.getCategories();
 	}
 
 	public Long getId() {
@@ -55,11 +63,11 @@ public class ProductDTO implements Serializable {
 		this.description = description;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -72,11 +80,11 @@ public class ProductDTO implements Serializable {
 	}
 
 	public Set<Categories> getCategories() {
-		return cat;
+		return categories;
 	}
 
-	public void setCategories(Set<Categories> cat) {
-		this.cat = cat;
+	public void setCategories(Set<Categories> categories) {
+		this.categories = categories;
 	}
 
 }
