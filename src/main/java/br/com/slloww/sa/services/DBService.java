@@ -57,7 +57,7 @@ public class DBService {
 		
 		Order o1 = new Order(c1, s1);
 		
-		OrderProduct op1 = new OrderProduct(3, p1, o1);
+		OrderProduct op1 = new OrderProduct(3, p1, p1.getPrice(), o1);
 		
 		
 		adminRepository.saveAll(Arrays.asList(a1));
