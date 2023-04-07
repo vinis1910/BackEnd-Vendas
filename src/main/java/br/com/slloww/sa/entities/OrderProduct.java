@@ -25,11 +25,12 @@ public class OrderProduct {
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderProduct(Integer quantity, Product product, Order order) {
+	public OrderProduct(Integer quantity, Product product, Double price, Order order) {
 		super();
 		this.quantity = quantity;
 		id.setOrder(order);
 		id.setProduct(product);
+		this.price = price;
 	}
 
 	@JsonIgnore
