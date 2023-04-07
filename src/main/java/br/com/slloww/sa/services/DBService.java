@@ -1,5 +1,6 @@
 package br.com.slloww.sa.services;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,8 @@ public class DBService {
 	
 	public void instanciaDB() {
 		
-		Product p1 = new Product(null, "Pc", "descricao pc", 2000.00);
-		p1.getCat().add(Categories.COMPUTER);
+		Product p1 = new Product(null, "Pc", "descricao pc", new BigDecimal("2000.0"));
+		p1.getCategories().add(Categories.COMPUTER);
 		
 		Admin a1 = new Admin(null, "Vinicius", "viniadm@gmail.com", encoder.encode("123"), "44988521221");
 		
@@ -58,6 +59,9 @@ public class DBService {
 		Order o1 = new Order(c1, s1);
 		
 		OrderProduct op1 = new OrderProduct(3, p1, p1.getPrice(), o1);
+		
+		System.out.printf("SubTotal: %f\n",op1.getSubTotal());
+		System.out.printf("Total: %f\n",o1.getTotal());
 		
 		
 		adminRepository.saveAll(Arrays.asList(a1));
