@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.slloww.sa.enums.Profiles;
 
@@ -25,17 +26,22 @@ public abstract class Person implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	@NotNull
 	protected String name;
 
 	@Column(unique = true)
+	@NotNull
 	protected String email;
+	@NotNull
 	protected String password;
 
 	@Column(unique = true)
+	@NotNull
 	protected String phone;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "profiles")
+	@NotNull
 	protected Set<Integer> profiles = new HashSet<>();
 
 	public Person() {

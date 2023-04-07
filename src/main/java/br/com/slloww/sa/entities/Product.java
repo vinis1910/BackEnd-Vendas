@@ -1,6 +1,7 @@
 package br.com.slloww.sa.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.slloww.sa.DTOs.ProductDTO;
 import br.com.slloww.sa.enums.Categories;
@@ -24,20 +26,23 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	@NotNull
 	private String name;
+	@NotNull
 	private String desc;
-	private Double price;
+	@NotNull
+	private BigDecimal price;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Categories")
-	private Set<Categories> cat = new HashSet<>();
+	@NotNull
+	private Set<Categories> categories = new HashSet<>();
 
 	public Product() {
 		super();
 	}
 
-	public Product(Long id, String name, String desc, Double price) {
+	public Product(Long id, String name, String desc, BigDecimal price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -77,19 +82,19 @@ public class Product implements Serializable {
 		this.desc = desc;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
-	public Set<Categories> getCat() {
-		return cat;
+	public Set<Categories> getCategories() {
+		return categories;
 	}
 
-	public void setCat(Set<Categories> cat) {
-		this.cat = cat;
+	public void setCategories(Set<Categories> categories) {
+		this.categories = categories;
 	}
 }
