@@ -31,7 +31,7 @@ public class Product implements Serializable {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Categories")
-	private Set<Categories> cat = new HashSet<>();
+	private Set<Categories> categories = new HashSet<>();
 
 	public Product() {
 		super();
@@ -85,11 +85,11 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 
-	public Set<Categories> getCat() {
-		return cat;
+	public Set<Categories> getCategories() {
+		return categories;
 	}
 
-	public void setCat(Set<Categories> cat) {
-		this.cat = cat;
+	public void setCategories(Set<Categories> categories) {
+		this.categories = categories;
 	}
 }

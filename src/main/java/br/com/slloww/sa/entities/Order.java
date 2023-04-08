@@ -3,6 +3,7 @@ package br.com.slloww.sa.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import br.com.slloww.sa.enums.PaymentStatus;
 
 @Entity
 @Table(name = "tb_order")
@@ -40,16 +43,19 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "Seller")
 	private Seller seller;
+	
+	private PaymentStatus paymentStatus;
 
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Customer customer, Seller seller) {
+	public Order(Customer customer, Seller seller, PaymentStatus paymentStatus) {
 		super();
 		this.customer = customer;
 		this.seller = seller;
+		this.paymentStatus = paymentStatus;
 	}
 	
 	public Long getId() {
@@ -92,4 +98,30 @@ public class Order implements Serializable {
 		this.seller = seller;
 	}
 
+	public PaymentStatus getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	
 }
