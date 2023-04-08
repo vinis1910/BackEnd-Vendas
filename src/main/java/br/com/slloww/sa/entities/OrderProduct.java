@@ -1,5 +1,6 @@
 package br.com.slloww.sa.entities;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
@@ -18,18 +19,19 @@ public class OrderProduct {
 	private OrderProductPk id = new OrderProductPk();
 	
 	private Integer quantity;
-	private Double price;
+	private BigDecimal price;
 	
 	public OrderProduct() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderProduct(Integer quantity, Product product, Order order) {
+	public OrderProduct(Integer quantity, Product product, BigDecimal price, Order order) {
 		super();
 		this.quantity = quantity;
 		id.setOrder(order);
 		id.setProduct(product);
+		this.price = price;
 	}
 
 	@JsonIgnore
@@ -57,16 +59,16 @@ public class OrderProduct {
 		this.quantity = quantity;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
-	public Double getSubTotal() {
-		return quantity * price;
+	public BigDecimal getSubTotal() {
+		return price.multiply(new BigDecimal(quantity));
 	}
 
 	@Override
