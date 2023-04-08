@@ -53,6 +53,10 @@ public class CustomerService {
 		return customerRepository.save(oldObj);
 	}
 
+	public void delete(Long id) {
+		customerRepository.deleteById(id);
+	}
+
 	private void ValidationByTelAndEmail(CustomerDTO objDTO) {
 		Optional<Person> obj = personRepository.findByPhone(objDTO.getPhone());
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {

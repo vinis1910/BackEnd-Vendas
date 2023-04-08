@@ -13,6 +13,7 @@ import br.com.slloww.sa.entities.OrderProduct;
 import br.com.slloww.sa.entities.Product;
 import br.com.slloww.sa.entities.Seller;
 import br.com.slloww.sa.enums.Categories;
+import br.com.slloww.sa.enums.PaymentStatus;
 import br.com.slloww.sa.repositories.AdminRepository;
 import br.com.slloww.sa.repositories.CustomerRepository;
 import br.com.slloww.sa.repositories.OrderProductRepository;
@@ -47,7 +48,7 @@ public class DBService {
 	public void instanciaDB() {
 		
 		Product p1 = new Product(null, "Pc", "descricao pc", 2000.00);
-		p1.getCat().add(Categories.COMPUTER);
+		p1.getCategories().add(Categories.COMPUTER);
 		
 		Admin a1 = new Admin(null, "Vinicius", "viniadm@gmail.com", encoder.encode("123"), "44988521221");
 		
@@ -55,11 +56,10 @@ public class DBService {
 		
 		Seller s1 = new Seller(null, "Vinicius G", "vinicius@gmail.com", encoder.encode("123"), "44988449911");
 		
-		Order o1 = new Order(c1, s1);
+		Order o1 = new Order(c1, s1, PaymentStatus.CANCELED);
 		
 		OrderProduct op1 = new OrderProduct(3, p1, o1);
-		
-		
+		 
 		adminRepository.saveAll(Arrays.asList(a1));
 		sellerRepository.saveAll(Arrays.asList(s1));
 		customerRepository.saveAll(Arrays.asList(c1));
