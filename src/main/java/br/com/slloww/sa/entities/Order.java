@@ -1,6 +1,7 @@
 package br.com.slloww.sa.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -31,17 +33,21 @@ public class Order implements Serializable {
 
 	@JsonFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
 	@Column(name = "Date")
+	@NotNull
 	private LocalDateTime date = LocalDateTime.now();
 
 	@OneToMany(mappedBy = "id.order")
+	@NotNull
 	private Set<OrderProduct> products = new HashSet<>();
 
 	@ManyToOne
 	@JoinColumn(name = "Customers")
+	@NotNull
 	private Customer customer;
 	
 	@ManyToOne
 	@JoinColumn(name = "Seller")
+	@NotNull
 	private Seller seller;
 	
 	private PaymentStatus paymentStatus;
@@ -106,6 +112,12 @@ public class Order implements Serializable {
 		this.paymentStatus = paymentStatus;
 	}
 
+	public BigDecimal getTotal() {
+	    return products.stream()
+	    		.map(item -> item.getSubTotal())
+	            .reduce(BigDecimal.ZERO, BigDecimal::add);
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

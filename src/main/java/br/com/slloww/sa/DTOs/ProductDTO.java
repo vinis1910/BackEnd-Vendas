@@ -1,20 +1,29 @@
 package br.com.slloww.sa.DTOs;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.validation.constraints.NotNull;
 
 import br.com.slloww.sa.entities.Product;
 import br.com.slloww.sa.enums.Categories;
 
 public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@NotNull
 	private Long id;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String description;
-	private Double price;
+	@NotNull
+	private BigDecimal price;
 	private String imaUrl;
+
+	@NotNull
 	private Set<Categories> categories = new HashSet<>();
 
 	public ProductDTO() {
@@ -55,11 +64,11 @@ public class ProductDTO implements Serializable {
 		this.description = description;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

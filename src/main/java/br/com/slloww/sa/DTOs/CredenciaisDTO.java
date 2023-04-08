@@ -1,8 +1,11 @@
 package br.com.slloww.sa.DTOs;
 
-public class CredenciaisDTO {
+import javax.validation.constraints.NotNull;
 
+public class CredenciaisDTO {
+	@NotNull
 	private String email;
+	@NotNull
 	private String password;
 
 	public String getEmail() {
