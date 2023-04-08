@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import br.com.slloww.sa.entities.Order;
+import br.com.slloww.sa.enums.PaymentStatus;
 
 public class OrderDTO implements Serializable {
 		private static final long serialVersionUID = 1L;
@@ -14,6 +15,7 @@ public class OrderDTO implements Serializable {
 		private String seller_name;
 		private Long customer_id;
 		private Long seller_id;
+		private PaymentStatus paymentStatus;
 
 		public OrderDTO() {
 		}
@@ -26,6 +28,7 @@ public class OrderDTO implements Serializable {
 			this.seller_name = order.getSeller().getName();
 			this.customer_id = order.getCustomer().getId();
 			this.seller_id = order.getSeller().getId();
+			this.paymentStatus = order.getPaymentStatus();
 		}
 
 		public Long getId() {
@@ -75,4 +78,22 @@ public class OrderDTO implements Serializable {
 		public void setSeller_id(Long seller_id) {
 			this.seller_id = seller_id;
 		}
+
+		public LocalDateTime getDate() {
+			return date;
+		}
+
+		public void setDate(LocalDateTime date) {
+			this.date = date;
+		}
+
+		public PaymentStatus getPaymentStatus() {
+			return paymentStatus;
+		}
+
+		public void setPaymentStatus(PaymentStatus paymentStatus) {
+			this.paymentStatus = paymentStatus;
+		}
+		
+		
 }

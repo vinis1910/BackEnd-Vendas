@@ -15,7 +15,7 @@ public class ProductDTO implements Serializable {
 	private String description;
 	private Double price;
 	private String imaUrl;
-	private Set<Categories> cat = new HashSet<>();
+	private Set<Categories> categories = new HashSet<>();
 
 	public ProductDTO() {
 		super();
@@ -28,7 +28,7 @@ public class ProductDTO implements Serializable {
 		this.nome = product.getName();
 		this.description = product.getDesc();
 		this.price = product.getPrice();
-		this.cat = product.getCat();
+		this.categories = product.getCategories();
 	}
 
 	public Long getId() {
@@ -72,11 +72,11 @@ public class ProductDTO implements Serializable {
 	}
 
 	public Set<Categories> getCategories() {
-		return cat;
+		return categories;
 	}
 
-	public void setCategories(Set<Categories> cat) {
-		this.cat = cat;
+	public void setCategories(Set<Categories> categories) {
+		this.categories = categories;
 	}
 
 }
