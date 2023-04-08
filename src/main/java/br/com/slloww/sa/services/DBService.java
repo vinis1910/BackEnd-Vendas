@@ -48,10 +48,6 @@ public class DBService {
 	
 	public void instanciaDB() {
 		
-<<<<<<< HEAD
-
-=======
->>>>>>> 406d0fad586a34e00ae2802b61aa3d503ac77910
 		Product p1 = new Product(null, "Pc", "descricao pc", new BigDecimal("2000.0"));
 
 		p1.getCategories().add(Categories.COMPUTER);
@@ -63,11 +59,7 @@ public class DBService {
 		Seller s1 = new Seller(null, "Vinicius G", "vinicius@gmail.com", encoder.encode("123"), "44988449911");
 		
 		Order o1 = new Order(c1, s1, PaymentStatus.CANCELED);
-		
-<<<<<<< HEAD
-=======
 
->>>>>>> 406d0fad586a34e00ae2802b61aa3d503ac77910
 		OrderProduct op1 = new OrderProduct(3, p1, p1.getPrice(), o1);
 		
 		System.out.printf("SubTotal: %f\n",op1.getSubTotal());
