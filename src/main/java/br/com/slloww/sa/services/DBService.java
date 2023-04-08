@@ -14,6 +14,7 @@ import br.com.slloww.sa.entities.OrderProduct;
 import br.com.slloww.sa.entities.Product;
 import br.com.slloww.sa.entities.Seller;
 import br.com.slloww.sa.enums.Categories;
+import br.com.slloww.sa.enums.PaymentStatus;
 import br.com.slloww.sa.repositories.AdminRepository;
 import br.com.slloww.sa.repositories.CustomerRepository;
 import br.com.slloww.sa.repositories.OrderProductRepository;
@@ -48,6 +49,7 @@ public class DBService {
 	public void instanciaDB() {
 		
 		Product p1 = new Product(null, "Pc", "descricao pc", new BigDecimal("2000.0"));
+
 		p1.getCategories().add(Categories.COMPUTER);
 		
 		Admin a1 = new Admin(null, "Vinicius", "viniadm@gmail.com", encoder.encode("123"), "44988521221");
@@ -56,8 +58,9 @@ public class DBService {
 		
 		Seller s1 = new Seller(null, "Vinicius G", "vinicius@gmail.com", encoder.encode("123"), "44988449911");
 		
-		Order o1 = new Order(c1, s1);
+		Order o1 = new Order(c1, s1, PaymentStatus.CANCELED);
 		
+
 		OrderProduct op1 = new OrderProduct(3, p1, p1.getPrice(), o1);
 		
 		System.out.printf("SubTotal: %f\n",op1.getSubTotal());

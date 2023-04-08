@@ -35,6 +35,7 @@ public class Product implements Serializable {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Categories")
+
 	@NotNull
 	private Set<Categories> categories = new HashSet<>();
 

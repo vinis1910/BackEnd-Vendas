@@ -20,6 +20,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.slloww.sa.enums.PaymentStatus;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
@@ -47,16 +49,19 @@ public class Order implements Serializable {
 	@JoinColumn(name = "Seller")
 	@NotNull
 	private Seller seller;
+	
+	private PaymentStatus paymentStatus;
 
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Customer customer, Seller seller) {
+	public Order(Customer customer, Seller seller, PaymentStatus paymentStatus) {
 		super();
 		this.customer = customer;
 		this.seller = seller;
+		this.paymentStatus = paymentStatus;
 	}
 	
 	public Long getId() {
@@ -99,12 +104,20 @@ public class Order implements Serializable {
 		this.seller = seller;
 	}
 
+	public PaymentStatus getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
 	public BigDecimal getTotal() {
 	    return products.stream()
 	    		.map(item -> item.getSubTotal())
 	            .reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
-	
+  
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -121,7 +134,4 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
-
-	
-	
 }

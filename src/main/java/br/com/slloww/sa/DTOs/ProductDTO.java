@@ -22,6 +22,7 @@ public class ProductDTO implements Serializable {
 	@NotNull
 	private BigDecimal price;
 	private String imaUrl;
+
 	@NotNull
 	private Set<Categories> categories = new HashSet<>();
 
