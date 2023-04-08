@@ -59,7 +59,6 @@ public class DBService {
 		Seller s1 = new Seller(null, "Vinicius G", "vinicius@gmail.com", encoder.encode("123"), "44988449911");
 		
 		Order o1 = new Order(c1, s1, PaymentStatus.CANCELED);
-		
 
 		OrderProduct op1 = new OrderProduct(3, p1, p1.getPrice(), o1);
 		
