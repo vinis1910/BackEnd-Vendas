@@ -117,7 +117,11 @@ public class Order implements Serializable {
 	    		.map(item -> item.getSubTotal())
 	            .reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
+<<<<<<< HEAD
 	
+=======
+  
+>>>>>>> 406d0fad586a34e00ae2802b61aa3d503ac77910
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -134,6 +138,9 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
+<<<<<<< HEAD
 
 	
+=======
+>>>>>>> 406d0fad586a34e00ae2802b61aa3d503ac77910
 }
